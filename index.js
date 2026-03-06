@@ -11,7 +11,7 @@ require('./src/models');
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // En producción cambia esto a la URL de tu frontend (ej. 'http://localhost:5173')
+    origin: ['http://localhost:5173', "https://red-chambera-front.vercel.app"], // En producción cambia esto a la URL de tu frontend (ej. 'http://localhost:5173')
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
