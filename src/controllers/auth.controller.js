@@ -12,7 +12,7 @@ const generateToken = (user) => {
 
 const register = async (req, res) => {
     try {
-        const { nombre, whatsapp, password, rol, municipio } = req.body;
+        const { nombre, whatsapp, password, rol } = req.body;
 
         // Verificar si el usuario ya existe
         const userExists = await User.findOne({ where: { whatsapp } });
@@ -24,13 +24,12 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Crear usuario
+        // Crear usuario (municipio se asigna por defecto: 'Tejupilco de Hidalgo')
         const user = await User.create({
             nombre,
             whatsapp,
             password: hashedPassword,
-            rol,
-            municipio
+            rol
         });
 
         const token = generateToken(user);

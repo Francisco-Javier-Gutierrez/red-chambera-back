@@ -26,6 +26,7 @@ const User = sequelize.define('User', {
     },
     municipio: {
         type: DataTypes.STRING,
+        defaultValue: 'Tejupilco de Hidalgo',
         allowNull: false,
     },
     foto_perfil: {

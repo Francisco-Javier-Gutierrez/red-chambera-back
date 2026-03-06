@@ -94,7 +94,7 @@ const getContenidoMix = async (req, res) => {
             }
             delete json.createdAt;
             delete json.updatedAt;
-            return { ...json, tipo_contenido: 'vacante' };
+            return { ...json, tipo: 'vacante' };
         });
 
         const fichasMod = fichas.map(f => {
@@ -107,7 +107,7 @@ const getContenidoMix = async (req, res) => {
             }
             delete json.createdAt;
             delete json.updatedAt;
-            return { ...json, tipo_contenido: 'ficha' };
+            return { ...json, tipo: 'ficha' };
         });
 
         const mix = [...vacantesMod, ...fichasMod].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));

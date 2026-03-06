@@ -21,6 +21,7 @@ const Vacante = sequelize.define('Vacante', {
     },
     municipio: {
         type: DataTypes.STRING,
+        defaultValue: 'Tejupilco de Hidalgo',
         allowNull: false,
     },
     horario: {
@@ -42,6 +43,11 @@ const Vacante = sequelize.define('Vacante', {
     activa: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
+    },
+    tipo_registro: {
+        type: DataTypes.ENUM('vacante', 'trabajador'),
+        defaultValue: 'vacante',
+        allowNull: false,
     },
     // empleador_id will be added by relations
 }, {

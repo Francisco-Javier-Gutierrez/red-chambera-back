@@ -3,13 +3,13 @@ const { Op } = require('sequelize');
 
 const getVacantes = async (req, res) => {
     try {
-        const { page = 1, limit = 10, municipio, tipo_trabajo, horario } = req.query;
+        const { page = 1, limit = 10, tipo_trabajo, horario, tipo_registro } = req.query;
         const offset = (page - 1) * limit;
 
         const where = { activa: true };
-        if (municipio) where.municipio = municipio;
         if (tipo_trabajo) where.tipo_trabajo = tipo_trabajo;
         if (horario) where.horario = horario;
+        if (tipo_registro) where.tipo_registro = tipo_registro;
 
         const { count, rows } = await Vacante.findAndCountAll({
             where,
@@ -105,17 +105,18 @@ const getMisVacantes = async (req, res) => {
 
 const createVacante = async (req, res) => {
     try {
-        const { titulo, descripcion, tipo_trabajo, municipio, horario, pago, requisitos, whatsapp_contacto } = req.body;
+        const { titulo, descripcion, tipo_trabajo, horario, pago, requisitos, whatsapp_contacto, tipo_registro } = req.body;
 
+        // municipio se asigna por defecto: 'Tejupilco de Hidalgo'
         const vacante = await Vacante.create({
             titulo,
             descripcion,
             tipo_trabajo,
-            municipio,
             horario,
             pago,
             requisitos,
             whatsapp_contacto,
+            tipo_registro: tipo_registro || 'vacante',
             empleador_id: req.user.id
         });
 
